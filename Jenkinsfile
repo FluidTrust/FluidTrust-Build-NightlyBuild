@@ -19,7 +19,9 @@ node {
                 ['Palladio-Supporting-Problog'],
                 ['Palladio-Supporting-Prolog4J'],
                 ['Palladio-Supporting-DataFlowDiagramConfidentiality'],
-                ['Palladio-Addons-DataFlowConfidentiality']
+                ['Palladio-Addons-DataFlowConfidentiality'],
+                ['Palladio-Addons-ContextConfidentiality-Metamodel'],
+                ['Palladio-Addons-ContextConfidentiality-Analysis']
             ]
 
             hierarchy.each { repoNames ->
