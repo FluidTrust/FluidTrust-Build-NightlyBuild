@@ -21,7 +21,7 @@ node {
                 ['Palladio-Supporting-DataFlowDiagramConfidentiality'],
                 ['Palladio-Addons-DataFlowConfidentiality'],
                 ['Palladio-Addons-ContextConfidentiality-Metamodel'],
-                ['Palladio-Addons-ContextConfidentiality-Analysis']
+                ['Palladio-Addons-ContextConfidentiality-Analysis', 'Palladio-Editors-ContextConfidentiality-Sirius']
             ]
 
             hierarchy.each { repoNames ->
