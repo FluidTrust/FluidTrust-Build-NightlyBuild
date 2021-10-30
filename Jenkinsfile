@@ -21,6 +21,7 @@ node {
                 ['Palladio-Supporting-DataFlowDiagramConfidentiality'],
                 ['Palladio-Addons-DataFlowConfidentiality', 'Palladio-Supporting-DataFlowConfidentialityQueryDSL'],
                 ['Palladio-Addons-DataFlowConfidentialityQueryDSL', 'Palladio-Addons-ContextConfidentiality-Metamodel'],
+		['Palladio-Addons-ContextConfidentiality-Analysis'],
                 ['FluidTrust-Build-Updatesite'],
                 ['Palladio-Bench-Product-DataFlowConfidentiality']
             ]
