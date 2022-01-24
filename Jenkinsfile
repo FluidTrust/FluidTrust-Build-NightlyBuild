@@ -23,7 +23,7 @@ node {
                 ['Palladio-Addons-DataFlowConfidentialityQueryDSL', 'Palladio-Addons-ContextConfidentiality-Metamodel'],
                 ['Palladio-Addons-ContextConfidentiality-Analysis'],
                 ['FluidTrust-Build-Updatesite'],
-                ['Palladio-Bench-Product-DataFlowConfidentiality'],
+                ['Palladio-Bench-Product-DataFlowConfidentiality', 'Palladio-Addons-DataFlowConfidentiality-DSE'],
                 ['Palladio-Bench-Product-AttackerPropagation']
             ]
 
