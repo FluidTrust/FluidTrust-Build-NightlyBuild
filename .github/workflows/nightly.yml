@@ -135,36 +135,38 @@ jobs:
           remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
   Palladio-Addons-ContextConfidentiality-Metamodel:
-    runs-on: ubuntu-latest
     needs: [Palladio-Addons-DataFlowConfidentiality, Palladio-Supporting-DataFlowConfidentialityQueryDSL]
     if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Addons-ContextConfidentiality-Metamodel
+    uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.2
+    with:
           deploy-updatesite: 'releng/org.palladiosimulator.pcm.confidentiality.context.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
+          java-version: 17
+          use-display-output: true
+          no-caching: true
+          runner-label: ubuntu-latest
+    secrets:
+          SERVER_SSH_KEY: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
+          REMOTE_USER: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
+          REMOTE_TARGET: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
   Palladio-Addons-ContextConfidentiality-Analysis:
-    runs-on: ubuntu-latest
     needs: [Palladio-Addons-DataFlowConfidentialityQueryDSL, Palladio-Addons-ContextConfidentiality-Metamodel]
     if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
+    uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.2
+    with:
+          deploy-updatesite: 'releng/org.palladiosimulator.pcm.confidentiality.context.analysis.updatesite/target/repository'
+          java-version: 17
           use-display-output: true
-          build-repository: FluidTrust/Palladio-Addons-ContextConfidentiality-Analysis
-          deploy-updatesite: 'releng/org.palladiosimulator.pcm.confidentiality.context.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
+          no-caching: true
+          runner-label: ubuntu-latest
+    secrets:
+          SERVER_SSH_KEY: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
+          REMOTE_USER: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
+          REMOTE_TARGET: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
   FluidTrust-Build-Updatesite:
     runs-on: ubuntu-latest
@@ -215,17 +217,18 @@ jobs:
           remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
   Palladio-Bench-Product-AttackerPropagation:
-    runs-on: ubuntu-latest
     needs: [Palladio-Bench-Product-DataFlowConfidentiality, Palladio-Addons-DataFlowConfidentiality-DSE]
     if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Bench-Product-AttackerPropagation
+    uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.2
+    with:
           deploy-updatesite: 'products/org.palladiosimulator.product/target/deploy'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
+          java-version: 17
+          use-display-output: true
+          no-caching: true
+          runner-label: ubuntu-latest
+    secrets:
+          SERVER_SSH_KEY: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
+          REMOTE_USER: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
+          REMOTE_TARGET: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
