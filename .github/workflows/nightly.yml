@@ -6,136 +6,8 @@ on:
   - cron: "0 0 * * *"
 
 jobs:
-  Palladio-Supporting-Prolog:
-    runs-on: ubuntu-latest
-    needs: []
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Supporting-Prolog
-          deploy-updatesite: 'releng/org.palladiosimulator.supporting.prolog.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Supporting-DataFlowDiagram:
-    runs-on: ubuntu-latest
-    needs: []
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Supporting-DataFlowDiagram
-          deploy-updatesite: 'releng/org.palladiosimulator.dataflow.diagram.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Supporting-Problog:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Supporting-DataFlowDiagram, Palladio-Supporting-Prolog]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Supporting-Problog
-          deploy-updatesite: 'releng/org.palladiosimulator.supporting.problog.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Supporting-Prolog4J:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Supporting-Problog]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Supporting-Prolog4J
-          deploy-updatesite: 'releng/org.prolog4j.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Supporting-DataFlowDiagramConfidentiality:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Supporting-Prolog4J]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Supporting-DataFlowDiagramConfidentiality
-          deploy-updatesite: 'releng/org.palladiosimulator.dataflow.confidentiality.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Addons-DataFlowConfidentiality:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Supporting-DataFlowDiagramConfidentiality]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Addons-DataFlowConfidentiality
-          deploy-updatesite: 'releng/org.palladiosimulator.dataflow.confidentiality.pcm.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Supporting-DataFlowConfidentialityQueryDSL:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Supporting-DataFlowDiagramConfidentiality]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Supporting-DataFlowConfidentialityQueryDSL
-          deploy-updatesite: 'releng/org.palladiosimulator.dataflow.confidentiality.querydsl.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Addons-DataFlowConfidentialityQueryDSL:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Addons-DataFlowConfidentiality, Palladio-Supporting-DataFlowConfidentialityQueryDSL]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Addons-DataFlowConfidentialityQueryDSL
-          deploy-updatesite: 'releng/org.palladiosimulator.dataflow.confidentiality.pcm.querydsl.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
   Palladio-Addons-ContextConfidentiality-Metamodel:
-    needs: [Palladio-Addons-DataFlowConfidentiality, Palladio-Supporting-DataFlowConfidentialityQueryDSL]
     if: success() || failure()
     uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.2
     with:
@@ -152,7 +24,7 @@ jobs:
           REMOTE_TARGET: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
   Palladio-Addons-ContextConfidentiality-Analysis:
-    needs: [Palladio-Addons-DataFlowConfidentialityQueryDSL, Palladio-Addons-ContextConfidentiality-Metamodel]
+    needs: [Palladio-Addons-ContextConfidentiality-Metamodel]
     if: success() || failure()
     uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.2
     with:
@@ -168,56 +40,8 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
           REMOTE_TARGET: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
 
-  FluidTrust-Build-Updatesite:
-    runs-on: ubuntu-latest
-    needs: [Palladio-Addons-ContextConfidentiality-Analysis]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/FluidTrust-Build-Updatesite
-          deploy-updatesite: 'target/classes/p2/final'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Bench-Product-DataFlowConfidentiality:
-    runs-on: ubuntu-latest
-    needs: [FluidTrust-Build-Updatesite]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Bench-Product-DataFlowConfidentiality
-          deploy-updatesite: 'products/org.palladiosimulator.dataflow.confidentiality.pcm.product/target/deploy'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
-  Palladio-Addons-DataFlowConfidentiality-DSE:
-    runs-on: ubuntu-latest
-    needs: [FluidTrust-Build-Updatesite]
-    if: success() || failure()
-    steps:
-      - uses: PalladioSimulator/Palladio-Build-ActionsPipeline@v2
-        with:
-          use-display-output: true
-          build-repository: FluidTrust/Palladio-Addons-DataFlowConfidentiality-DSE
-          deploy-updatesite: 'releng/org.palladiosimulator.dataflow.confidentiality.pcm.dsexplore.analysis.updatesite/target/repository'
-          server-ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
-          remote-host: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}
-          remote-port: ${{ secrets.DEPLOYMENT_REMOTE_PORT }}
-          remote-user: ${{ secrets.DEPLOYMENT_REMOTE_USER }}
-          remote-target: ${{ secrets.DEPLOYMENT_REMOTE_TARGET }}
-
   Palladio-Bench-Product-AttackerPropagation:
-    needs: [Palladio-Bench-Product-DataFlowConfidentiality, Palladio-Addons-DataFlowConfidentiality-DSE]
+    needs: [Palladio-Addons-ContextConfidentiality-Analysis]
     if: success() || failure()
     uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.2
     with:
