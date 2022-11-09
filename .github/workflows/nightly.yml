@@ -14,6 +14,7 @@ jobs:
           deploy-updatesite: 'releng/org.palladiosimulator.pcm.confidentiality.context.updatesite/target/repository'
           java-version: 17
           use-display-output: true
+          build-repository: FluidTrust/Palladio-Addons-ContextConfidentiality-Metamodel
           no-caching: true
           runner-label: ubuntu-latest
     secrets:
@@ -31,6 +32,7 @@ jobs:
           deploy-updatesite: 'releng/org.palladiosimulator.pcm.confidentiality.context.analysis.updatesite/target/repository'
           java-version: 17
           use-display-output: true
+          build-repository: FluidTrust/Palladio-Addons-ContextConfidentiality-Analysis
           no-caching: true
           runner-label: ubuntu-latest
     secrets:
@@ -47,6 +49,7 @@ jobs:
     with:
           deploy-updatesite: 'products/org.palladiosimulator.product/target/deploy'
           java-version: 17
+          build-repository: FluidTrust/Palladio-Bench-Product-AttackerPropagation
           use-display-output: true
           no-caching: true
           runner-label: ubuntu-latest
